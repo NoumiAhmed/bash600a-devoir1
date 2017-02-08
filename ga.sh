@@ -116,6 +116,10 @@ function init {
     nb_arguments=0
 
     # A COMPLETER: traitement de la switch --detruire!
+    if [[ $2 =~ ^--detruire$ ]]; then
+        detruire=true
+        ((arguments_utilises++))
+    fi
 
     if [[ -f $depot ]]; then
         # Depot existe deja.
