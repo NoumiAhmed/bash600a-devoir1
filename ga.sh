@@ -1,4 +1,4 @@
-#!/bin/sh -
+#!/bin/bash -
 #
 # Gestion de cours de programme d'etudes.
 
@@ -116,11 +116,9 @@ function init {
     echo $1
     shift
     nb_arguments=0
-    
     # A COMPLETER: traitement de la switch --detruire!
     #echo $1
     if [[ $1 =~ ^--detruire$ ]]; then
-        
         ((nb_arguments++))
     fi
 
@@ -135,7 +133,7 @@ function init {
     fi
 
     # On 'cree' le fichier vide.
-    #touch $depot
+    touch $depot
 
     return $nb_arguments
 }
@@ -207,7 +205,6 @@ function trouver {
 # Commande nb_credits
 #
 # Arguments: depot [sigle...]
-# 
 # Erreurs:
 # - depot inexistant
 # - sigle inexistant
@@ -221,7 +218,6 @@ function nb_credits {
 # Commande supprimer
 #
 # Arguments: depot sigle
-# 
 # Erreurs:
 # - depot inexistant
 # - nombre incorrect d'arguments
@@ -302,7 +298,12 @@ function main {
   debug "On utilise le depot suivant:", $depot
 
   if [[ $1 =~ ^--depot=.* ]]; then
-    depot
+    depot=${1#--depot=}
+   shift
+    if [[ $1 != "init" ]]; then
+    assert_depot_existe $depot
+    fi
+  fi
 
   
   # On analyse la commande (= dispatcher).
