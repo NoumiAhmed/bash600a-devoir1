@@ -112,24 +112,30 @@ function assert_depot_existe {
 #  - Le depot existe deja et l'option --detruire n'a pas ete indiquee
 #-------
 function init {
-    depot=$1; shift
+    depot=$1; 
+    echo $1
+    shift
     nb_arguments=0
-
+    
     # A COMPLETER: traitement de la switch --detruire!
-    if [[ $2 =~ ^--detruire$ ]]; then
-        detruire=true
-        ((arguments_utilises++))
+    #echo $1
+    if [[ $1 =~ ^--detruire$ ]]; then
+        
+        ((nb_arguments++))
     fi
 
     if [[ -f $depot ]]; then
         # Depot existe deja.
         # On le detruit quand --detruire est specifie.
-        [[ $detruire ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'."
-        \rm -f $depot
+         if [[ $nb_arguments == 1 ]]; then 
+          rm -f $depot
+        else
+          erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." 
+        fi
     fi
 
     # On 'cree' le fichier vide.
-    touch $depot
+    #touch $depot
 
     return $nb_arguments
 }
@@ -294,6 +300,9 @@ function main {
   depot=$DEPOT_DEFAUT
 
   debug "On utilise le depot suivant:", $depot
+
+  if [[ $1 =~ ^--depot=.* ]]; then
+    depot
 
   
   # On analyse la commande (= dispatcher).
