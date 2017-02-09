@@ -297,6 +297,8 @@ function main {
 
   debug "On utilise le depot suivant:", $depot
 
+#on verifie s'il y a une option
+###############################
   if [[ $1 =~ ^--depot=.* ]]; then
     depot=${1#--depot=}
    shift
@@ -304,8 +306,8 @@ function main {
     assert_depot_existe $depot
     fi
   fi
-
-  
+###############################
+#
   # On analyse la commande (= dispatcher).
   commande=$1
   shift
