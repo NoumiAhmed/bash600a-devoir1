@@ -1,20 +1,4 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @turkguy
- Unwatch 2
-  Star 0
-  Fork 0 NoumiAhmed/bash600a-devoir1
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs
-Branch: master Find file Copy pathbash600a-devoir1/ga.sh
-ed4036d  3 hours ago
-@NoumiAhmed NoumiAhmed ajout commentaire dans le main
-3 contributors @NoumiAhmed @turkguy @tremblay-guy
-RawBlameHistory     
-Executable File  339 lines (289 sloc)  7.45 KB
+
 #!/bin/bash -
 #
 # Gestion de cours de programme d'etudes.
