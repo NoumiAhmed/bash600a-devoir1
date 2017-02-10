@@ -68,23 +68,24 @@ def avec_fichier( nom_fichier, lignes = [], conserver = nil )
 end
 
 #
-# Execute la commande indiquee puis retourne la liste des lignes
-# emises sur stdout suite a l'execution de la commande.
+# Execute le script ./ga.sh avec commande, options et arguments
+# indiques puis retourne les lignes emises sur stdout et stderr suite
+# a l'execution de cette commande, ainsi que le code de statut.
 #
-# @param [String] cmd La commande a executer (sans 'bin/mini-sed')
-# @return [Array<String>] La liste des lignes produites sur stdout
+# @param [String] cmd La commande a executer avec ses options et
+# arguments  (sans './ga.sh')
+# @return [Array[Array<String>, Array<String>, Fixnum] Les lignes
+#produites sur stdout, stderr et le code de statut
 #
 def ga( cmd )
-  # On execute la commande indiquee et on retourne un Array des lignes
-  # obtenues.
-  stdout = stderr = wt = nil
-  Open3.popen3( "./ga.sh #{cmd}" ) do |i, o, e, w|
-    i.close
-    stdout = o.readlines.map!(&:chomp!)
-    stderr = e.readlines.map!(&:chomp!)
-    wt = w
-  end
-  [stdout, stderr, wt.value.exitstatus]
+ stdout = stderr = wt = nil
+ Open3.popen3( "./ga.sh #{cmd}" ) do |i, o, e, w|
+   i.close
+   stdout = o.readlines.map!(&:chomp!)
+   stderr = e.readlines.map!(&:chomp!)
+   wt = w
+ end
+ [stdout, stderr, wt.value.exitstatus]
 end
 
 #
