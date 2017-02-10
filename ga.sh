@@ -1,4 +1,3 @@
-
 #!/bin/bash -
 #
 # Gestion de cours de programme d'etudes.
@@ -41,8 +40,8 @@ function erreur {
 
     # A COMPLETER: Les erreurs doivent etre emises stderr...
     # mais ce n'est pas le cas pour l'instant!
-    echo "*** Erreur: $msg"
-    echo ""
+    >&2 echo "*** Erreur: $msg"
+    >&2 echo ""
 
     # On emet le message d'aide si commande fournie invalide.
     # Par contre, ce message doit etre emis sur stdout.
@@ -112,7 +111,7 @@ function assert_depot_existe {
 #-------
 function init {
     depot=$1; 
-    echo $1
+    
     shift
     nb_arguments=0
     # A COMPLETER: traitement de la switch --detruire!
@@ -124,11 +123,10 @@ function init {
     if [[ -f $depot ]]; then
         # Depot existe deja.
         # On le detruit quand --detruire est specifie.
-         if [[ $nb_arguments == 1 ]]; then 
-          rm -f $depot
-        else
-          erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." 
-        fi
+        
+          [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." rm -f $depot
+        
+        
     fi
 
     # On 'cree' le fichier vide.
@@ -298,12 +296,11 @@ function main {
 
 #on verifie s'il y a une option
 ###############################
-  if [[ $1 =~ ^--depot=.* ]]; then
-    depot=${1#--depot=}
-   shift
-    if [[ $1 != "init" ]]; then
-    assert_depot_existe $depot
-    fi
+  if [[ $1 =~ ^--depot=* ]]; then
+    depot=${1##--depot=}
+    shift
+  else
+    depot=$DEPOT_DEFAUT
   fi
 ###############################
 #
@@ -335,5 +332,3 @@ function main {
 
 main "$@"
 exit 0
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
