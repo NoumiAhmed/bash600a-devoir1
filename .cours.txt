@@ -1,0 +1,6 @@
+MAT3140,Algebre et logique,3,,INACTIF
+INF1120,Programmation I,3,,ACTIF
+INF1130,Mathematiques pour informaticien,3,,ACTIF
+INF2120,Programmation II,3,INF1120,ACTIF
+INF3105,Structures de donnees et algorithmes,3,INF1130:INF2120,ACTIF
+INF3135,Construction et maintenance de logiciels,3,INF1120,ACTIF

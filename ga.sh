@@ -110,8 +110,8 @@ function assert_depot_existe {
 #  - Le depot existe deja et l'option --detruire n'a pas ete indiquee
 #-------
 function init {
-    depot=$1; 
-    
+    #depot=$1; 
+
     shift
     nb_arguments=0
     # A COMPLETER: traitement de la switch --detruire!
@@ -123,10 +123,8 @@ function init {
     if [[ -f $depot ]]; then
         # Depot existe deja.
         # On le detruit quand --detruire est specifie.
-        
+
           [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." rm -f $depot
-        
-        
     fi
 
     # On 'cree' le fichier vide.
@@ -159,8 +157,21 @@ readonly SEPARATEUR_PREALABLES=:
 # Erreurs:
 # - depot inexistant
 #-------
+
 function lister {
-    return 0
+     args=0
+    # depot=$1
+     shift
+     title_and_prior='"\""$2"\"","("$4")"'
+    #echo $title_and_prior
+    if [[ $1 =~ ^--avec_inactifs$ ]]; then
+      ((args++))
+         avec_inactifs="/,INACTIF$/ { print \$1\"?\", $title_and_prior }"
+    fi
+
+    eval "awk -F "$SEP" '/,ACTIF$/ { print \$1, $title_and_prior } $avec_inactifs' $depot"
+
+    return  args;
 }
 
 
