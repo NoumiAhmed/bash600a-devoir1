@@ -160,18 +160,8 @@ readonly SEPARATEUR_PREALABLES=:
 
 function lister {
      args=0
-    # depot=$1
-     shift
-     title_and_prior='"\""$2"\"","("$4")"'
-    #echo $title_and_prior
-    if [[ $1 =~ ^--avec_inactifs$ ]]; then
-      ((args++))
-         avec_inactifs="/,INACTIF$/ { print \$1\"?\", $title_and_prior }"
-    fi
-
-    eval "awk -F "$SEP" '/,ACTIF$/ { print \$1, $title_and_prior } $avec_inactifs' $depot"
-
-    return  args;
+    cat $depot | awk -F, '{print $1,"\42"$2"\42","("$4")"}'
+    return  1;
 }
 
 
