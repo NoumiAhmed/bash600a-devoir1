@@ -46,7 +46,7 @@ function erreur {
     # On emet le message d'aide si commande fournie invalide.
     # Par contre, ce message doit etre emis sur stdout.
     [[ ! $msg =~ Commande\ inconnue ]] || aide
-    
+
     exit 1
 }
 
@@ -110,7 +110,6 @@ function assert_depot_existe {
 #  - Le depot existe deja et l'option --detruire n'a pas ete indiquee
 #-------
 function init {
-    #depot=$1; 
 
     shift
     nb_arguments=0
@@ -124,7 +123,7 @@ function init {
         # Depot existe deja.
         # On le detruit quand --detruire est specifie.
 
-          [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." rm -f $depot
+        [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." rm -f $depot
     fi
 
     # On 'cree' le fichier vide.
@@ -159,9 +158,19 @@ readonly SEPARATEUR_PREALABLES=:
 #-------
 
 function lister {
-     args=0
-    cat $depot | awk -F, '{print $1,"\42"$2"\42","("$4")"}'
-    return  1;
+    shift
+    args=0
+
+    if [[ $1 =~ ^--avec_inactifs$ ]]; then
+    ((args++))
+    fi
+
+   if  [[ -f $depot ]]; then
+
+   cat $depot | awk -F, '{print $1,"\42"$2"\42","("$4")"}' | sort
+   if
+    return  args;
+
 }
 
 
