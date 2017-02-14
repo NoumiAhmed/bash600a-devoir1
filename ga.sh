@@ -123,7 +123,8 @@ function init {
         # Depot existe deja.
         # On le detruit quand --detruire est specifie.
 
-        [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." rm -f $depot
+        [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." 
+        rm -f $depot
     fi
 
     # On 'cree' le fichier vide.
@@ -158,18 +159,24 @@ readonly SEPARATEUR_PREALABLES=:
 #-------
 
 function lister {
-    shift
-    args=0
+   args=0
+   assert_depot_existe $depot
+   shift
 
-    if [[ $1 =~ ^--avec_inactifs$ ]]; then
+   if [[ $1 =~ ^--avec_inactifs$ ]]; then
     ((args++))
-    fi
+     echo "ok"
+   fi
 
    if  [[ -f $depot ]]; then
-
-   cat $depot | awk -F, '{print $1,"\42"$2"\42","("$4")"}' | sort
-   if
-    return  args;
+   echo "ok"
+     if [[ $args > 0 ]]; then
+      awk -F$SEP, '{print $1,"\42"$2"\42","("$4")"}'
+     else
+      awk -F$SEP, '/,ACTIF$/ { print $1, "\42"$2"\42","("$4")" }'
+     fi
+   fi
+  return $args
 
 }
 
@@ -332,11 +339,11 @@ function main {
       trouver)
           $commande $depot "$@";;
 
-      *) 
+      *)
           erreur "Commande inconnue: '$commande'";;
   esac
   shift $?
-  
+
   [[ $# == 0 ]] || erreur "Argument(s) en trop: '$@'"
 }
 
