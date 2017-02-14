@@ -165,19 +165,15 @@ function lister {
 
    if [[ $1 =~ ^--avec_inactifs$ ]]; then
     ((args++))
-     echo "ok"
    fi
 
-   if  [[ -f $depot ]]; then
-   echo "ok"
      if [[ $args > 0 ]]; then
-      awk -F$SEP, '{print $1,"\42"$2"\42","("$4")"}'
+      awk -F$SEP, '{print $1,"\42"$2"\42","("$4")"}'| sort
      else
-      awk -F$SEP, '/,ACTIF$/ { print $1, "\42"$2"\42","("$4")" }'
+      awk -F$SEP, '/,ACTIF$/ {print $1, "\42"$2"\42","("$4")" }' | sort
      fi
-   fi
-  return $args
 
+  return $args
 }
 
 
