@@ -113,8 +113,7 @@ function init {
 
     shift
     nb_arguments=0
-    # A COMPLETER: traitement de la switch --detruire!
-    #echo $1
+  
     if [[ $1 =~ ^--detruire$ ]]; then
         ((nb_arguments++))
     fi
@@ -161,15 +160,16 @@ readonly SEPARATEUR_PREALABLES=:
 function lister {
    args=0
    assert_depot_existe $1
+   local depot=$1
    shift
 
-   if [[ $1 =~ ^--avec_inactifs$ ]]; then
-    ((args++))
-  fi
+    if [[ $1 =~ ^--avec_inactifs$ ]]; then
+      ((args++))
+    fi
         
     awk -F$SEP -v args=$args '/,ACTIF/ { print $1, "\""$2"\"", "\("$4"\)" } /,INACTIF$/ && args!=0 { print $1"?", "\""$2"\"", "\("$4"\)" }' $depot | sort
     
-     return $args
+    return $args
 }
 
 
@@ -216,7 +216,22 @@ function trouver {
 # - sigle inexistant
 #-------
 function nb_credits {
-    return 0
+    args=0
+    file=$1
+    assert_depot_existe $1
+    somme_credit=0
+    shift
+    
+    for a in "$@" 
+    do
+    ((somme_credit+=$(awk -F$SEP -v sigle=$1 '$1==sigle  {print $3}' $file)))
+    
+    ((args++))
+    shift
+    done
+    
+    echo $somme_credit
+    return $args
 }
 
 
