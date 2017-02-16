@@ -160,20 +160,16 @@ readonly SEPARATEUR_PREALABLES=:
 
 function lister {
    args=0
-   assert_depot_existe $depot
+   assert_depot_existe $1
    shift
 
    if [[ $1 =~ ^--avec_inactifs$ ]]; then
     ((args++))
-   fi
-
-     if [[ $args > 0 ]]; then
-      awk -F$SEP, '{print $1,"\42"$2"\42","("$4")"}'| sort
-     else
-      awk -F$SEP, '/,ACTIF$/ {print $1, "\42"$2"\42","("$4")" }' | sort
-     fi
-
-  return $args
+  fi
+        
+    awk -F$SEP -v args=$args '/,ACTIF/ { print $1, "\""$2"\"", "\("$4"\)" } /,INACTIF$/ && args!=0 { print $1"?", "\""$2"\"", "\("$4"\)" }' $depot | sort
+    
+     return $args
 }
 
 
