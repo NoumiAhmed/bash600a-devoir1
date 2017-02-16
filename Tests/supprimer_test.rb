@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 describe "GestionAcademique" do
   describe "supprimer" do
-    _it_ "signale une erreur si depot inexistant", :intermediaire do
+    it_ "signale une erreur si depot inexistant", :intermediaire do
       FileUtils.rm_f '.cours.txt'
       genere_erreur /fichier.*[.]cours.txt.*existe pas/ do
         ga( 'supprimer INF1120' )
@@ -19,7 +19,7 @@ describe "GestionAcademique" do
                       ]
       }
 
-      _it_ "signale une erreur si le sigle n'existe pas", :intermediaire do
+      it_ "signale une erreur si le sigle n'existe pas", :intermediaire do
         avec_fichier '.cours.txt', lignes do
           genere_erreur /Aucun cours.*INF9999/ do
             ga( "supprimer INF9999" )
@@ -27,7 +27,7 @@ describe "GestionAcademique" do
         end
       end
 
-      _it_ "signale une erreur si argument en trop", :intermediaire do
+      it_ "signale une erreur si argument en trop", :intermediaire do
         avec_fichier '.cours.txt', lignes do
           genere_sortie_et_erreur [], /Argument.*en trop/ do
             ga( 'supprimer INF2120 foo' )
