@@ -269,6 +269,22 @@ function supprimer {
 # - cours deja inactif
 #-------
 function desactiver {
+  args=0
+  file=$1
+  
+
+  shift
+  assert_depot_existe $file 
+  
+  echo $1
+  echo $file
+  assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+  
+  awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file 
+  $? || erreur "Cours deja inactif: $2"
+
+
+
     return 0
 }
 
@@ -309,10 +325,11 @@ function prealables {
 
 function assert_sigle_existant {
 
+  
   valid=$(grep $1 $2)
-    existe=1
-    if [[ -n $valid ]]; then
-        existe=0
+    existe=0
+    if [[ $valid == '' ]]; then
+        existe=1
     fi
     #echo $existe
     return $existe
