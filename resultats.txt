@@ -1,0 +1,300 @@
+++ RESULTATS DES TESTS ++
+-- ruby Tests/ajouter_test.rb
+Run options: --seed 583
+
+# Running:
+
+FFFFFFFFFFFF
+
+Finished in 0.334275s, 35.8986 runs/s, 134.6197 assertions/s.
+
+  1) Failure:
+GestionAcademique::ajouter::banque de cours avec plusieurs cours#test_0001_ajoute un cours s'il n'existe pas [Tests/ajouter_test.rb:71]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-"INF3143,Modelisation et specification formelle,3,INF1130:INF2120,ACTIF"
++"INF3135,Construction et maintenance de logiciels,3,INF1120,ACTIF"
+
+
+
+  2) Failure:
+GestionAcademique::ajouter::banque de cours avec plusieurs cours#test_0004_signale une erreur si le cours existe deja [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  3) Failure:
+GestionAcademique::ajouter::banque de cours avec plusieurs cours#test_0002_signale une erreur si un prealable est incorrect [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  4) Failure:
+GestionAcademique::ajouter::banque de cours avec plusieurs cours#test_0003_signale une erreur si un prealable est invalide parce qu'inexistant [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  5) Failure:
+GestionAcademique::ajouter::banque de cours autre que celui par defaut#test_0002_ajoute un cours s'il n'existe pas [Tests/ajouter_test.rb:124]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-"INF3143,Modelisation et specification formelle,3,INF1130:INF2120,ACTIF"
++"INF3135,Construction et maintenance de logiciels,3,INF1120,ACTIF"
+
+
+
+  6) Failure:
+GestionAcademique::ajouter::banque de cours autre que celui par defaut#test_0001_signale une erreur si depot inexistant [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  7) Failure:
+GestionAcademique::ajouter#test_0002_signale une erreur si depot inexistant [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  8) Failure:
+GestionAcademique::ajouter#test_0005_signale une erreur si un prealable est invalide parce qu'inexistant [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  9) Failure:
+GestionAcademique::ajouter#test_0001_ajoute dans un fichier vide [Tests/ajouter_test.rb:12]:
+Expected: 1
+  Actual: 0
+
+
+ 10) Failure:
+GestionAcademique::ajouter#test_0006_signale une erreur si un prealable est invalide parce qu'inactif [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+ 11) Failure:
+GestionAcademique::ajouter#test_0003_signale une erreur si le sigle est invalide [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+ 12) Failure:
+GestionAcademique::ajouter#test_0004_signale une erreur si un prealable est invalide au niveau du sigle [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+12 runs, 45 assertions, 12 failures, 0 errors, 0 skips
+-- ruby Tests/desactiver_reactiver_test.rb
+Run options: --seed 32682
+
+# Running:
+
+FFFFFF
+
+Finished in 0.118389s, 50.6804 runs/s, 219.6150 assertions/s.
+
+  1) Failure:
+GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours::reactiver#test_0002_change le statut du cours si le sigle existe [Tests/desactiver_reactiver_test.rb:69]:
+Expected /,ACTIF/ to match "MAT3140,Algebre et logique,3,,INACTIF".
+
+
+  2) Failure:
+GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours::reactiver#test_0001_signale une erreur si le sigle est deja actif [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  3) Failure:
+GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours::desactiver#test_0001_signale une erreur si le sigle est deja inactif [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  4) Failure:
+GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours::desactiver#test_0002_change le statut du cours si le sigle existe [Tests/desactiver_reactiver_test.rb:48]:
+Expected /,INACTIF/ to match "INF1120,Programmation I,3,,ACTIF".
+
+
+  5) Failure:
+GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours#test_0001_signalent une erreur si le sigle n'existe pas [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  6) Failure:
+GestionAcademique::deactiver et reactiver#test_0001_signalent une erreur si depot inexistant [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+6 runs, 26 assertions, 6 failures, 0 errors, 0 skips
+-- ruby Tests/init_test.rb
+Run options: --seed 15715
+
+# Running:
+
+........
+
+Finished in 0.223615s, 35.7758 runs/s, 214.6547 assertions/s.
+
+8 runs, 48 assertions, 0 failures, 0 errors, 0 skips
+-- ruby Tests/lister_test.rb
+Run options: --seed 1449
+
+# Running:
+
+...F...
+
+Finished in 0.215117s, 32.5404 runs/s, 139.4590 assertions/s.
+
+  1) Failure:
+GestionAcademique::lister#test_0005_genere une erreur si arguments en trop [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:134]:
+Expected /Argument.*en trop/ to match # encoding: US-ASCII
+"".
+
+7 runs, 30 assertions, 1 failures, 0 errors, 0 skips
+-- ruby Tests/nb_credits_test.rb
+Run options: --seed 45711
+
+# Running:
+
+...
+
+Finished in 0.188959s, 15.8765 runs/s, 68.7980 assertions/s.
+
+3 runs, 13 assertions, 0 failures, 0 errors, 0 skips
+-- ruby Tests/prealables_test.rb
+Run options: --seed 22878
+
+# Running:
+
+FF.FFF
+
+Finished in 0.178626s, 33.5897 runs/s, 78.3760 assertions/s.
+
+  1) Failure:
+GestionAcademique::prealables#test_0002_signale une erreur si le sigle n'existe pas [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  2) Failure:
+GestionAcademique::prealables#test_0001_signale une erreur si fichier inexistant [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:110]:
+Expected 0 to not be equal to 0.
+
+
+  3) Failure:
+GestionAcademique::prealables::banque de cours avec plusieurs cours#test_0002_retourne les prealables directs, en ordre [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+Expected: ["INF1130", "INF2120"]
+  Actual: []
+
+
+  4) Failure:
+GestionAcademique::prealables::banque de cours avec plusieurs cours#test_0003_retourne tous les prealables, directs et indirects, en ordre [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120", "INF1130", "INF2120"]
++[]
+
+
+
+  5) Failure:
+GestionAcademique::prealables::banque de cours avec plusieurs cours dont plusieurs prealables indirects#test_0001_retourne tous les prealables, directs et indirects, en ordre [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120", "INF1130", "INF2120", "INF3105", "INF3135", "INF4100", "INF7341"]
++[]
+
+
+6 runs, 14 assertions, 5 failures, 0 errors, 0 skips
+-- ruby Tests/supprimer_test.rb
+Run options: --seed 28263
+
+# Running:
+
+....
+
+Finished in 0.113407s, 35.2712 runs/s, 185.1738 assertions/s.
+
+4 runs, 21 assertions, 0 failures, 0 errors, 0 skips
+-- ruby Tests/trouver_test.rb
+Run options: --seed 37114
+
+# Running:
+
+FFFFFFF.FF
+
+Finished in 0.354061s, 28.2437 runs/s, 42.3656 assertions/s.
+
+  1) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0004_trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["MAT3140,Algebre et logique,3,,INACTIF", "INF1120,Programmation I,3,,ACTIF", "INF1130,Mathematiques pour informaticien,3,,ACTIF", "INF2120,Programmation II,3,INF1120,ACTIF"]
++["4"]
+
+
+
+  2) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0006_trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs en ordre de titre [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["MAT3140,Algebre et logique,3,,INACTIF", "INF1130,Mathematiques pour informaticien,3,,ACTIF", "INF1120,Programmation I,3,,ACTIF", "INF2120,Programmation II,3,INF1120,ACTIF"]
++["4"]
+
+
+
+  3) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0001_trouve toutes les lignes avec un caractere quelconque [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120,Programmation I,3,,ACTIF", "INF1130,Mathematiques pour informaticien,3,,ACTIF", "INF2120,Programmation II,3,INF1120,ACTIF", "INF3105,Structures de donnees et algorithmes,3,INF1130:INF2120,ACTIF", "INF3135,Construction et maintenance de logiciels,3,INF1120,ACTIF"]
++["4"]
+
+
+
+  4) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0002_trouve toutes les lignes avec n'importe quoi [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120,Programmation I,3,,ACTIF", "INF1130,Mathematiques pour informaticien,3,,ACTIF", "INF2120,Programmation II,3,INF1120,ACTIF", "INF3105,Structures de donnees et algorithmes,3,INF1130:INF2120,ACTIF", "INF3135,Construction et maintenance de logiciels,3,INF1120,ACTIF"]
++["4"]
+
+
+
+  5) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0003_trouve les lignes matchant une chaine specifique mais parmi les actifs seulement [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120,Programmation I,3,,ACTIF", "INF1130,Mathematiques pour informaticien,3,,ACTIF", "INF2120,Programmation II,3,INF1120,ACTIF"]
++["4"]
+
+
+
+  6) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0005_trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs en ordre de sigle [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120,Programmation I,3,,ACTIF", "INF1130,Mathematiques pour informaticien,3,,ACTIF", "INF2120,Programmation II,3,INF1120,ACTIF", "MAT3140,Algebre et logique,3,,INACTIF"]
++["4"]
+
+
+
+  7) Failure:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0007_affiche tous les cours selon le format indique [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120 => 'Programmation I' (3 cr.)", "INF1130 => 'Mathematiques pour informaticien' (3 cr.)", "INF2120 => 'Programmation II' (3 cr.)", "INF3105 => 'Structures de donnees et algorithmes' (3 cr.)", "INF3135 => 'Construction et maintenance de logiciels' (3 cr.)"]
++["4"]
+
+
+
+  8) Failure:
+GestionAcademique::trouver#test_0002_retourne rien si fichier vide [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:117]:
+Expected ["4"] to be empty.
+
+
+  9) Failure:
+GestionAcademique::trouver#test_0003_signale une erreur si argument en trop [/home/alex/DepotGit/bash600a-devoir1/bash600a-devoir1/Tests/test_helper.rb:133]:
+Expected: []
+  Actual: ["4"]
+
+10 runs, 15 assertions, 9 failures, 0 errors, 0 skips

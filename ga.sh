@@ -213,21 +213,21 @@ function trouver {
    args=1 #au moins un argument:le cours a trouver
 
    shift
-  if [[ $1=~^--avec_inactifs$ ]]; then
+  if [[ $1 =~ ^--avec_inactifs$ ]]; then
     cours_inactif=1
     shift
     ((args++))
    fi
 
-  if [[ $1=~^--cle_tri= ]]; then
+  if [[ $1 =~ ^--cle_tri= ]]; then
     tri_selon=${1##--cle_tri=}
     shift
     ((args++))
    fi
 
-  if [[ $1=~^--format= ]]; then
+  if [[ $1 =~ ^--format= ]]; then
    format_court=${1##--format=}
-   shift 
+   shift
    ((args++))
   fi
 
@@ -250,7 +250,7 @@ function nb_credits {
     somme_credit=0
     shift
 
-    for a in "$@" 
+    for a in "$@"
     do
       assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
       ((somme_credit+=$(awk -F$SEP -v sigle=$1 '$1==sigle  {print $3}' $file)))
