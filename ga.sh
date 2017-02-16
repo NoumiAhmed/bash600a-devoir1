@@ -167,7 +167,7 @@ function lister {
       ((args++))
     fi
         
-    awk -F$SEP -v args=$args '/,ACTIF/ { print $1, "\""$2"\"", "\("$4"\)" } /,INACTIF$/ && args!=0 { print $1"?", "\""$2"\"", "\("$4"\)" }' $depot | sort
+    awk -F$SEP -v args=$args '/,ACTIF/ { print $1, "\""$2"\"", "("$4")" } /,INACTIF$/ && args!=0 { print $1"?", "\""$2"\"", "("$4")" }' $depot | sort
     
     return $args
 }
@@ -222,14 +222,16 @@ function nb_credits {
     somme_credit=0
     shift
     
+    
+
     for a in "$@" 
     do
-    ((somme_credit+=$(awk -F$SEP -v sigle=$1 '$1==sigle  {print $3}' $file)))
-    
-    ((args++))
-    shift
+      assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+      ((somme_credit+=$(awk -F$SEP -v sigle=$1 '$1==sigle  {print $3}' $file)))
+      ((args++))
+      shift
     done
-    
+
     echo $somme_credit
     return $args
 }
@@ -293,6 +295,30 @@ function reactiver {
 function prealables {
     return 0
 }
+
+
+##########################################################################
+# Autre fonctions
+
+
+function assert_sigle_existant {
+
+  valid=$(grep $1 $2)
+    existe=1
+    if [[ -n $valid ]]; then
+        existe=0
+    fi
+    #echo $existe
+    return $existe
+
+}
+  
+
+
+
+
+##########################################################################
+
 
 ##########################################################################
 # Le programme principal
