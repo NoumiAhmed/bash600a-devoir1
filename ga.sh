@@ -246,11 +246,13 @@ function nb_credits {
 #-------
 function supprimer {
    file=$1
-   shift
+   
    assert_depot_existe $file
-   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
-   [[ $@ == 2 ]] || erreur "Nombre incorrect d'arguments"
-   sed '/$1/d' $file
+   #echo $#
+  [[ $# == 2 ]] || erreur "Argument(s) en trop: '$@'"
+   assert_sigle_existant $2 $file || erreur "Aucun cours: $2"
+   echo $file
+   sed -i "/^$2/d" $file
     return 1
 }
 
@@ -380,8 +382,6 @@ function main {
           erreur "Commande inconnue: '$commande'";;
   esac
   shift $?
-
-  [[ $# == 0 ]] || erreur "Argument(s) en trop: '$@'"
 }
 
 main "$@"
