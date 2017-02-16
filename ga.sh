@@ -246,13 +246,13 @@ function nb_credits {
 #-------
 function supprimer {
    file=$1
-   
+   shift
    assert_depot_existe $file
-   #echo $#
-  [[ $# == 2 ]] || erreur "Argument(s) en trop: '$@'"
-   assert_sigle_existant $2 $file || erreur "Aucun cours: $2"
-   echo $file
-   sed -i "/^$2/d" $file
+   
+   [[ $# == 1 ]] || erreur "Argument(s) en trop: '$@'"
+   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+   
+   sed -i  "/^$1/d" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
     return 1
 }
 
