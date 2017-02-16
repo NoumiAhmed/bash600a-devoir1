@@ -221,8 +221,6 @@ function nb_credits {
     assert_depot_existe $1
     somme_credit=0
     shift
-    
-    
 
     for a in "$@" 
     do
@@ -247,7 +245,13 @@ function nb_credits {
 # - sigle inexistant
 #-------
 function supprimer {
-    return 0
+   file=$1
+   shift
+   assert_depot_existe $file
+   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+   [[ $@ == 2 ]] || erreur "Nombre incorrect d'arguments"
+   sed '/$1/d' $file
+    return 1
 }
 
 
