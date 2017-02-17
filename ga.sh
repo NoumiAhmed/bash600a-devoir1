@@ -225,10 +225,30 @@ function trouver {
    fi
 
    if [[ $1 =~ ^--format= ]]; then
-    format_court=${1##--format=}
+    format_cours=${1##--format=}
     shift
     ((args++))
    fi
+   if [[ $args -eq 1 ]]; then
+    grep -i ^$1 $file
+
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours == "" ]]; then
+    echo "juste cours inactif"
+   grep -i ^$1 $file | grep -v ,INACTIF$
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
+   echo "cours inactif + format"
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then
+    echo "cours inactif + tri + format"
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours == "" ]]; then
+    echo "cours inactif + tri"
+   elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then
+   echo "tri + format"
+
+   #elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
+   else
+   echo "juste format"
+
+fi
 
     return $args
 }
@@ -274,7 +294,7 @@ function supprimer {
    file=$1
    shift
    assert_depot_existe $file
-   
+
    [[ $# == 1 ]] || erreur "Argument(s) en trop: '$@'"
    assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
 
