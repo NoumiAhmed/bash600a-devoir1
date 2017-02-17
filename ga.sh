@@ -211,8 +211,8 @@ function trouver {
    [[ $# -ge 2 ]] || erreur "Nombre insuffisant d'arguments"
 
    args=1 #au moins un argument:le cours a trouver
-
    shift
+
   if [[ $1 =~ ^--avec_inactifs$ ]]; then
     cours_inactif=1
     shift
@@ -230,8 +230,7 @@ function trouver {
    shift
    ((args++))
   fi
-
-   echo "$args"
+#echo $args
    return $args
 }
 
