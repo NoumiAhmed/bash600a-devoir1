@@ -296,21 +296,18 @@ function supprimer {
 #-------
 function desactiver {
   file=$1
-
+  
   shift
+  [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
   assert_depot_existe $file 
-
-  #echo $1
-  #echo $file
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
-
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
   
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
   sed -i "/^$1,/ s/ACTIF/INACTIF/" $file
 
 
-    return 1
+    return $#
 }
 
 #-------
@@ -325,13 +322,10 @@ function desactiver {
 # - cours deja actif
 #-------
 function reactiver {
-    file=$1
-
+  file=$1
   shift
+  [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
   assert_depot_existe $file 
-
-  #echo $1
-  #echo $file
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
 
   res=$(awk -F$SEP -v sigle="$1" '/,ACTIF/ && sigle==$1 {print $5}' $file)
@@ -340,7 +334,7 @@ function reactiver {
   sed -i "/^$1,/ s/INACTIF/ACTIF/" $file
 
 
-    return 1
+    return $#
 }
 
 
