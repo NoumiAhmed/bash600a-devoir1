@@ -353,7 +353,7 @@ function assert_sigle_existant {
 
   valid=$(grep $1 $2)
     existe=0
-    if [[ $valid == '' ]]; then
+    if [[ $valid == "" ]]; then
         existe=1
     fi
     #echo $existe
