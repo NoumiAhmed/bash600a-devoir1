@@ -230,13 +230,13 @@ function trouver {
     ((args++))
    fi
    if [[ $args -eq 1 ]]; then
-    grep -i ^$1 $file
+    grep -i ^$1 $file | grep -v ,INACTIF$"
 
    elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours == "" ]]; then
-    echo "juste cours inactif"
-   grep -i ^$1 $file | grep -v ,INACTIF$
+    grep -i ^$1 $file
    elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
    echo "cours inactif + format"
+   grep -i ^$1 $file | 
    elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then
     echo "cours inactif + tri + format"
    elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours == "" ]]; then
