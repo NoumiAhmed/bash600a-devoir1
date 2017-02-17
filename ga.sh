@@ -281,9 +281,9 @@ function desactiver {
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
   
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
-  echo $res
+  #echo $res
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
-   
+  
 
 
     return 1
@@ -327,7 +327,7 @@ function prealables {
 function assert_sigle_existant {
 
   
-  valid=$(grep $1 $2)
+  valid=$(grep ^$1, $2)
     existe=0
     if [[ $valid == '' ]]; then
         existe=1
