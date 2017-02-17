@@ -304,7 +304,7 @@ function desactiver {
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
   
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
-  sed -i "/^$1,/ s/ACTIF/INACTIF/" $file
+  sed -i "/^$1,/ s/ACTIF/INACTIF/" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
 
 
     return $#
@@ -331,7 +331,7 @@ function reactiver {
   res=$(awk -F$SEP -v sigle="$1" '/,ACTIF/ && sigle==$1 {print $5}' $file)
   
   [[ $res == "" ]] || erreur "Cours deja actif: $1"
-  sed -i "/^$1,/ s/INACTIF/ACTIF/" $file
+  sed -i "/^$1,/ s/INACTIF/ACTIF/" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
 
 
     return $#
