@@ -246,12 +246,13 @@ function trouver {
 
    #elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
    else
-   echo "juste format"
+   echo "juste format
 
 fi
 
     return $args
 }
+
 
 #-------
 # Commande nb_credits
@@ -294,7 +295,7 @@ function supprimer {
    file=$1
    shift
    assert_depot_existe $file
-
+   
    [[ $# == 1 ]] || erreur "Argument(s) en trop: '$@'"
    assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
 
@@ -315,23 +316,19 @@ function supprimer {
 # - cours deja inactif
 #-------
 function desactiver {
-  args=0
   file=$1
-
+  
   shift
+  [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
   assert_depot_existe $file 
-
-  #echo $1
-  #echo $file
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
-
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
-  echo $res
+  
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
+  sed -i "/^$1,/ s/ACTIF/INACTIF/" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
 
 
-
-    return 1
+    return $#
 }
 
 #-------
@@ -346,7 +343,19 @@ function desactiver {
 # - cours deja actif
 #-------
 function reactiver {
-    return 0
+  file=$1
+  shift
+  [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
+  assert_depot_existe $file 
+  assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+
+  res=$(awk -F$SEP -v sigle="$1" '/,ACTIF/ && sigle==$1 {print $5}' $file)
+  
+  [[ $res == "" ]] || erreur "Cours deja actif: $1"
+  sed -i "/^$1,/ s/INACTIF/ACTIF/" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
+
+
+    return $#
 }
 
 
@@ -373,7 +382,7 @@ function assert_sigle_existant {
 
   valid=$(grep $1 $2)
     existe=0
-    if [[ $valid == "" ]]; then
+    if [[ $valid == '' ]]; then
         existe=1
     fi
     #echo $existe
