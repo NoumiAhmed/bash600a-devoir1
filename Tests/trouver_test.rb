@@ -18,7 +18,7 @@ describe "GestionAcademique" do
     end
 
     
-   _it_ "signale une erreur si argument en trop", :intermediaire do
+   it_ "signale une erreur si argument en trop", :intermediaire do
       avec_fichier '.cours.txt' do
         genere_sortie_et_erreur [], /Argument.*en trop/ do
           ga( 'trouver "." foo' )

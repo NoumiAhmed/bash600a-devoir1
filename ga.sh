@@ -207,11 +207,9 @@ function trouver {
 
     file=$1
     assert_depot_existe $file
-
-    [[ $# -ge 2 ]] || erreur "Nombre insuffisant d'arguments"
-    #[[ $# -n ]]
-    args=1 #au moins un argument:le cours a trouver
     shift
+    [[ $# -ge 1 ]] || erreur "Nombre insuffisant d'arguments"
+    args=1
 
    if [[ $1 =~ ^--avec_inactifs$ ]]; then
      cours_inactif=1
@@ -255,7 +253,7 @@ function trouver {
    echo "juste format"
 grep -i ^$1 $file | grep -v ,INACTIF$
 fi
-  echo $args
+  #echo $args
     return $args
 }
 
