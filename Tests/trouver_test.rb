@@ -17,7 +17,8 @@ describe "GestionAcademique" do
       end
     end
 
-    it_ "signale une erreur si argument en trop", :intermediaire do
+    
+   _it_ "signale une erreur si argument en trop", :intermediaire do
       avec_fichier '.cours.txt' do
         genere_sortie_et_erreur [], /Argument.*en trop/ do
           ga( 'trouver "." foo' )
@@ -36,7 +37,7 @@ describe "GestionAcademique" do
         end
       end
 
-      it_ "trouve toutes les lignes avec n'importe quoi" do
+     it_ "trouve toutes les lignes avec n'importe quoi" do
         avec_fichier '.cours.txt', lignes do
           genere_sortie lignes.select { |l| l !~ /INACTIF/ }.map(&:chomp) do
             ga( "trouver '.*'" )
@@ -44,7 +45,7 @@ describe "GestionAcademique" do
         end
       end
 
-      it_ "trouve les lignes matchant une chaine specifique mais parmi les actifs seulement" do
+      _it_ "trouve les lignes matchant une chaine specifique mais parmi les actifs seulement" do
         avec_fichier '.cours.txt', lignes do
           attendu = ['INF1120,Programmation I,3,,ACTIF',
                      'INF1130,Mathematiques pour informaticien,3,,ACTIF',
@@ -56,7 +57,7 @@ describe "GestionAcademique" do
         end
       end
 
-      it_ "trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs", :intermediaire do
+      _it_ "trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs", :intermediaire do
         avec_fichier '.cours.txt', lignes do
           attendu = ['MAT3140,Algebre et logique,3,,INACTIF',
                      'INF1120,Programmation I,3,,ACTIF',
@@ -70,7 +71,7 @@ describe "GestionAcademique" do
         end
       end
 
-      it_ "trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs en ordre de sigle", :avance do
+      _it_ "trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs en ordre de sigle", :avance do
         avec_fichier '.cours.txt', lignes do
           attendu = ['INF1120,Programmation I,3,,ACTIF',
                      'INF1130,Mathematiques pour informaticien,3,,ACTIF',
@@ -83,7 +84,7 @@ describe "GestionAcademique" do
         end
       end
 
-      it_ "trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs en ordre de titre", :avance do
+      _it_ "trouve les lignes matchant une chaine specifique parmi toutes y compris les inactifs en ordre de titre", :avance do
         avec_fichier '.cours.txt', lignes do
           attendu = ['MAT3140,Algebre et logique,3,,INACTIF',
                      'INF1130,Mathematiques pour informaticien,3,,ACTIF',
@@ -97,7 +98,7 @@ describe "GestionAcademique" do
         end
       end
 
-      it_ "affiche tous les cours selon le format indique", :avance do
+      _it_ "affiche tous les cours selon le format indique", :avance do
         avec_fichier '.cours.txt', lignes do
           attendu = ["INF1120 => 'Programmation I' (3 cr.)",
                      "INF1130 => 'Mathematiques pour informaticien' (3 cr.)",

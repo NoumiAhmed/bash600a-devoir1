@@ -205,10 +205,11 @@ function ajouter {
 #-------
 function trouver {
 
-   file=$1
+    file=$1
     assert_depot_existe $file
 
     [[ $# -ge 2 ]] || erreur "Nombre insuffisant d'arguments"
+    #[[ $# -n ]]
     args=1 #au moins un argument:le cours a trouver
     shift
 
@@ -230,26 +231,31 @@ function trouver {
     ((args++))
    fi
    if [[ $args -eq 1 ]]; then
-    grep -i ^$1 $file | grep -v ,INACTIF$"
+
+    grep -i ^$1 $file | grep -v ,INACTIF$
 
    elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours == "" ]]; then
-    grep -i ^$1 $file
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
-   echo "cours inactif + format"
-   grep -i ^$1 $file | 
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then
-    echo "cours inactif + tri + format"
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours == "" ]]; then
-    echo "cours inactif + tri"
-   elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then
-   echo "tri + format"
+    grep -i ^$1 $file | grep -v ,INACTIF$
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then #inactif+format
+   grep -i ^$1 $file | grep -v ,INACTIF$
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then #les 3
+   grep -i ^$1 $file | grep -v ,INACTIF$
+   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours == "" ]]; then #inactif+tri
 
+    if [[ $tri_selon == "sigle" ]]; then
+    grep -i ^$1 $file | sort -t\"$SEP\"
+     else
+    grep -i ^$1 $file | sort -t\"$SEP\" -k2
+    fi
+
+   elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then #tri+format
+    grep -i ^$1 $file | grep -v ,INACTIF$
    #elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
    else
-   echo "juste format
-
+   echo "juste format"
+grep -i ^$1 $file | grep -v ,INACTIF$
 fi
-
+  echo $args
     return $args
 }
 
@@ -269,7 +275,7 @@ function nb_credits {
     somme_credit=0
     shift
 
-    for a in "$@" 
+    for a in "$@"
     do
       assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
       ((somme_credit+=$(awk -F$SEP -v sigle=$1 '$1==sigle  {print $3}' $file)))
@@ -295,7 +301,7 @@ function supprimer {
    file=$1
    shift
    assert_depot_existe $file
-   
+
    [[ $# == 1 ]] || erreur "Argument(s) en trop: '$@'"
    assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
 
@@ -317,13 +323,13 @@ function supprimer {
 #-------
 function desactiver {
   file=$1
-  
+
   shift
   [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
   assert_depot_existe $file 
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
-  
+
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
   sed -i "/^$1,/ s/ACTIF/INACTIF/" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
 
