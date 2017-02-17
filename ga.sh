@@ -166,9 +166,9 @@ function lister {
     if [[ $1 =~ ^--avec_inactifs$ ]]; then
       ((args++))
     fi
-        
+
     awk -F$SEP -v args=$args '/,ACTIF/ { print $1, "\""$2"\"", "("$4")" } /,INACTIF$/ && args!=0 { print $1"?", "\""$2"\"", "("$4")" }' $depot | sort
-    
+
     return $args
 }
 
@@ -204,7 +204,33 @@ function ajouter {
 # - item de format invalide
 #-------
 function trouver {
-    return 0
+
+   file=$1
+    assert_depot_existe $file
+
+    [[ $# -ge 2 ]] || erreur "Nombre insuffisant d'arguments"
+    args=1 #au moins un argument:le cours a trouver
+    shift
+
+   if [[ $1 =~ ^--avec_inactifs$ ]]; then
+     cours_inactif=1
+     shift
+     ((args++))
+    fi
+
+   if [[ $1 =~ ^--cle_tri= ]]; then
+     tri_selon=${1##--cle_tri=}
+     shift
+     ((args++))
+   fi
+
+   if [[ $1 =~ ^--format= ]]; then
+    format_court=${1##--format=}
+    shift
+    ((args++))
+   fi
+
+    return $args
 }
 
 #-------
@@ -251,7 +277,7 @@ function supprimer {
    
    [[ $# == 1 ]] || erreur "Argument(s) en trop: '$@'"
    assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
-   
+
    sed -i  "/^$1/d" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
     return 1
 }
@@ -271,19 +297,18 @@ function supprimer {
 function desactiver {
   args=0
   file=$1
-  
 
   shift
   assert_depot_existe $file 
-  
+
   #echo $1
   #echo $file
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
-  
+
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
   echo $res
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
-   
+
 
 
     return 1
@@ -326,7 +351,6 @@ function prealables {
 
 function assert_sigle_existant {
 
-  
   valid=$(grep $1 $2)
     existe=0
     if [[ $valid == '' ]]; then
@@ -336,10 +360,6 @@ function assert_sigle_existant {
     return $existe
 
 }
-  
-
-
-
 
 ##########################################################################
 
