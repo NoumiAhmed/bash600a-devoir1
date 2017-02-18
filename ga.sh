@@ -188,9 +188,31 @@ function lister {
 
 
 function ajouter {
+   file=$1
+   assert_depot_existe $file ; shift
+   [[ $# -ge 3 ]] || erreur "Nombre insuffisant d'arguments"
 
+   assert_sigle_valid $1 ; args=3
+   assert_sigle_existant $1 $file && erreur "meme sigle existe"
 
-    return 0
+   cours="$1$SEP$2$SEP$3$SEP"
+   shift 3
+
+   for i in $@
+    do
+
+   assert_sigle_valid $i
+   assert_sigle_existant $i $file || erreur "Prealable '$i' invalide"
+   cours="$cours$i"; ((args++))
+   shift
+   if [[ $# != 0 ]]; then
+    cours="$cours$SEPARATEUR_PREALABLES"
+   fi
+   done
+
+   echo "$cours,ACTIF" >> $file
+ 
+   return $args
 }
 
 
@@ -459,7 +481,9 @@ function main {
       *)
           erreur "Commande inconnue: '$commande'";;
   esac
-  shift $?
+    shift $?
+
+  [[ $# == 0 ]] || erreur "Argument(s) en trop: '$@'"
 }
 
 main "$@"
