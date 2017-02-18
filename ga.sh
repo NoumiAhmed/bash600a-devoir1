@@ -188,6 +188,8 @@ function lister {
 
 
 function ajouter {
+
+
     return 0
 }
 
@@ -393,6 +395,11 @@ function assert_sigle_existant {
     return $existe
 
 }
+
+function assert_sigle_valid {
+   [[ $1 =~ [A-Z]{3}[0-9]{4} ]] || erreur "Sigle incorrect: $1"
+  return $?
+} 
 
 ##########################################################################
 
