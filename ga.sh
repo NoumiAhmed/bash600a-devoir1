@@ -389,8 +389,35 @@ function reactiver {
 # - sigle inexistant
 #-------
 function prealables {
-    return 0
+  file=$1
+  args=0
+ 
+  assert_depot_existe $file
+  shift
+  ((args++))
+  assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+  [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
+
+  prea_existe=$(awk -F$SEP -v prea="$1" 'prea==$1 {print $4}' $file)
+  #echo $prea_existe
+
+  if [[ $prea_existe != "" ]]; then
+    
+     nb_champs=$(echo $prea_existe | awk -F$SEPARATEUR_PREALABLES '{print NF}') 
+     #echo $nb_champs
+     
+     sub=$(echo $prea_existe | sed -r 's/:/\x0a/g' )
+    
+     echo "$sub" | sort 
+     #echo "INF1130"
+     #echo "INF2120"
+  fi
+
+
+
+    return $args
 }
+
 
 
 ##########################################################################
@@ -401,7 +428,7 @@ function assert_sigle_existant {
 
     valid=$(grep $1 $2)
     existe=0
-    if [[ $valid == '' ]]; then
+    if [[ $valid == "" ]]; then
         existe=1
     fi
 
