@@ -1,90 +1,65 @@
 ++ RESULTATS DES TESTS ++
 -- ruby Tests/ajouter_test.rb
-Run options: --seed 7462
+Run options: --seed 52399
 
 # Running:
 
 ............
 
-Finished in 0.343227s, 34.9623 runs/s, 186.4655 assertions/s.
+Finished in 0.245642s, 48.8517 runs/s, 260.5422 assertions/s.
 
 12 runs, 64 assertions, 0 failures, 0 errors, 0 skips
 -- ruby Tests/desactiver_reactiver_test.rb
-Run options: --seed 27634
+Run options: --seed 12344
 
 # Running:
 
-..F..F
+......
 
-Finished in 0.177179s, 33.8641 runs/s, 214.4724 assertions/s.
+Finished in 0.162217s, 36.9875 runs/s, 271.2413 assertions/s.
 
-  1) Failure:
-GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours::reactiver#test_0002_change le statut du cours si le sigle existe [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:118]:
-Expected ["sed: 1: \".cours.txt\": invalid command code ."] to be empty.
-
-
-  2) Failure:
-GestionAcademique::deactiver et reactiver::banque de cours avec plusieurs cours::desactiver#test_0002_change le statut du cours si le sigle existe [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:118]:
-Expected ["sed: 1: \".cours.txt\": invalid command code ."] to be empty.
-
-6 runs, 38 assertions, 2 failures, 0 errors, 0 skips
+6 runs, 44 assertions, 0 failures, 0 errors, 0 skips
 -- ruby Tests/init_test.rb
-Run options: --seed 13475
+Run options: --seed 29190
 
 # Running:
 
 ........
 
-Finished in 0.152169s, 52.5731 runs/s, 315.4388 assertions/s.
+Finished in 0.133937s, 59.7294 runs/s, 358.3765 assertions/s.
 
 8 runs, 48 assertions, 0 failures, 0 errors, 0 skips
 -- ruby Tests/lister_test.rb
-Run options: --seed 62257
+Run options: --seed 61188
 
 # Running:
 
 .......
 
-Finished in 0.125357s, 55.8405 runs/s, 247.2937 assertions/s.
+Finished in 0.107403s, 65.1751 runs/s, 288.6326 assertions/s.
 
 7 runs, 31 assertions, 0 failures, 0 errors, 0 skips
 -- ruby Tests/nb_credits_test.rb
-Run options: --seed 36007
+Run options: --seed 36431
 
 # Running:
 
 ...
 
-Finished in 0.098646s, 30.4118 runs/s, 131.7844 assertions/s.
+Finished in 0.065825s, 45.5753 runs/s, 197.4932 assertions/s.
 
 3 runs, 13 assertions, 0 failures, 0 errors, 0 skips
 -- ruby Tests/prealables_test.rb
-Run options: --seed 40351
+Run options: --seed 38076
 
 # Running:
 
-F.FF..
+...F.F
 
-Finished in 0.162598s, 36.9008 runs/s, 110.7025 assertions/s.
+Finished in 0.111374s, 53.8725 runs/s, 188.5537 assertions/s.
 
   1) Failure:
-GestionAcademique::prealables::banque de cours avec plusieurs cours dont plusieurs prealables indirects#test_0001_retourne tous les prealables, directs et indirects, en ordre [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:125]:
---- expected
-+++ actual
-@@ -1 +1 @@
--["INF1120", "INF1130", "INF2120", "INF3105", "INF3135", "INF4100", "INF7341"]
-+[]
-
-
-
-  2) Failure:
-GestionAcademique::prealables::banque de cours avec plusieurs cours#test_0002_retourne les prealables directs, en ordre [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:125]:
-Expected: ["INF1130", "INF2120"]
-  Actual: [""]
-
-
-  3) Failure:
-GestionAcademique::prealables::banque de cours avec plusieurs cours#test_0003_retourne tous les prealables, directs et indirects, en ordre [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:125]:
+GestionAcademique::prealables::banque de cours avec plusieurs cours#test_0003_retourne tous les prealables, directs et indirects, en ordre [/home/ea791187/inf600a/bash600a-devoir1/Tests/test_helper.rb:125]:
 --- expected
 +++ actual
 @@ -1 +1 @@
@@ -92,32 +67,38 @@ GestionAcademique::prealables::banque de cours avec plusieurs cours#test_0003_re
 +[]
 
 
-6 runs, 18 assertions, 3 failures, 0 errors, 0 skips
+
+  2) Failure:
+GestionAcademique::prealables::banque de cours avec plusieurs cours dont plusieurs prealables indirects#test_0001_retourne tous les prealables, directs et indirects, en ordre [/home/ea791187/inf600a/bash600a-devoir1/Tests/test_helper.rb:125]:
+--- expected
++++ actual
+@@ -1 +1 @@
+-["INF1120", "INF1130", "INF2120", "INF3105", "INF3135", "INF4100", "INF7341"]
++[]
+
+
+6 runs, 21 assertions, 2 failures, 0 errors, 0 skips
 -- ruby Tests/supprimer_test.rb
-Run options: --seed 44373
+Run options: --seed 33266
 
 # Running:
 
-...F
+....
 
-Finished in 0.068113s, 58.7259 runs/s, 264.2667 assertions/s.
+Finished in 0.075102s, 53.2606 runs/s, 279.6179 assertions/s.
 
-  1) Failure:
-GestionAcademique::supprimer::banque de cours avec plusieurs cours#test_0003_supprime le cours si le sigle existe [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:118]:
-Expected ["sed: 1: \".cours.txt\": invalid command code ."] to be empty.
-
-4 runs, 18 assertions, 1 failures, 0 errors, 0 skips
+4 runs, 21 assertions, 0 failures, 0 errors, 0 skips
 -- ruby Tests/trouver_test.rb
-Run options: --seed 27632
+Run options: --seed 27206
 
 # Running:
 
-.....F....
+......F...
 
-Finished in 0.225651s, 44.3162 runs/s, 172.8333 assertions/s.
+Finished in 0.190362s, 52.5315 runs/s, 204.8727 assertions/s.
 
   1) Failure:
-GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0007_affiche tous les cours selon le format indique [/Users/omer/Desktop/ecole/hiver2017/inf600a/tp1/DepotsGit/bash600a-devoir1/Tests/test_helper.rb:125]:
+GestionAcademique::trouver::banque de cours avec plusieurs cours#test_0007_affiche tous les cours selon le format indique [/home/ea791187/inf600a/bash600a-devoir1/Tests/test_helper.rb:125]:
 --- expected
 +++ actual
 @@ -1 +1 @@
