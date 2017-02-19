@@ -190,7 +190,7 @@ function lister {
 function ajouter {
    file=$1
    assert_depot_existe $file ; shift
-   [[ $# -ge 3 ]] || erreur "Nombre insuffisant d'arguments"
+   [[ $# -ge 3 ]] || erreur "nombre insuffisant d'arguments"
 
    assert_sigle_valid $1 ; args=3
    assert_sigle_existant $1 $file && erreur "meme sigle existe"
@@ -239,45 +239,36 @@ function trouver {
      cours_inactif=1
      shift
      ((args++))
-    fi
+   fi
 
    if [[ $1 =~ ^--cle_tri= ]]; then
-     tri_selon=${1##--cle_tri=}
+    tri_selon=${1##--cle_tri=}
      shift
      ((args++))
    fi
 
    if [[ $1 =~ ^--format= ]]; then
-    format_cours=${1##--format=}
+   format_cours=${1##--format=}
     shift
     ((args++))
    fi
-   if [[ $args -eq 1 ]]; then
 
-    grep -i ^$1 $file | grep -v ,INACTIF$
+   cours_a_trouver="grep -i '$1' $depot"
 
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours == "" ]]; then
-    grep -i ^$1 $file | grep -v ,INACTIF$
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then #inactif+format
-   grep -i ^$1 $file | grep -v ,INACTIF$
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then #les 3
-   grep -i ^$1 $file | grep -v ,INACTIF$
-   elif [[ $cours_inactif -eq 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours == "" ]]; then #inactif+tri
-
-    if [[ $tri_selon == "sigle" ]]; then
-    grep -i ^$1 $file | sort -t\"$SEP\"
-     else
-    grep -i ^$1 $file | sort -t\"$SEP\" -k2
+    if [[ $cours_inactif != 1 ]]; then
+    cours_a_trouver="$cours_a_trouver | grep -v ,INACTIF$"
     fi
 
-   elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon != "" ]] && [[ $format_cours != "" ]]; then #tri+format
-    grep -i ^$1 $file | grep -v ,INACTIF$
-   #elif [[ $cours_inactif -ne 1 ]] && [[ $tri_selon == "" ]] && [[ $format_cours != "" ]]; then
-   else
-   echo "juste format"
-grep -i ^$1 $file | grep -v ,INACTIF$
-fi
-  #echo $args
+    if [[ $tri_selon != "" ]]; then
+
+     if [[ $tri_selon == "sigle" ]]; then
+      cours_a_trouver="$cours_a_trouver | sort -t\"$SEP\""
+     else
+      cours_a_trouver="$cours_a_trouver | sort -t\"$SEP\" -k2" #sort selon deuxieme cle
+     fi
+    fi
+
+   eval $cours_a_trouver
     return $args
 }
 
@@ -408,14 +399,13 @@ function prealables {
 
 function assert_sigle_existant {
 
-  valid=$(grep $1 $2)
+    valid=$(grep $1 $2)
     existe=0
     if [[ $valid == '' ]]; then
         existe=1
     fi
-    #echo $existe
-    return $existe
 
+    return $existe
 }
 
 function assert_sigle_valid {
