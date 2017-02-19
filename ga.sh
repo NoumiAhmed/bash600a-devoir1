@@ -186,10 +186,10 @@ function lister {
 function ajouter {
    file=$1
    assert_depot_existe $file ; shift
-   [[ $# -ge 3 ]] || erreur "nombre insuffisant d'arguments"
+   [[ $# -ge 3 ]] || erreur "Nombre insuffisant d'arguments"
 
    assert_sigle_valid $1 ; args=3
-   assert_sigle_existant $1 $file && erreur "meme sigle existe"
+   assert_sigle_existant $1 $file && erreur "Meme sigle existe"
 
    cours="$1$SEP$2$SEP$3$SEP"
    shift 3
