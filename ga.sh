@@ -119,14 +119,10 @@ function init {
     fi
 
     if [[ -f $depot ]]; then
-        # Depot existe deja.
-        # On le detruit quand --detruire est specifie.
-
-        [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." 
-        rm -f $depot
+      [[ $nb_arguments > 0 ]] || erreur "Le fichier '$depot' existe. Si vous voulez le detruire, utilisez 'init --detruire'." 
+      rm -f $depot
     fi
 
-    # On 'cree' le fichier vide.
     touch $depot
 
     return $nb_arguments
@@ -216,6 +212,7 @@ function ajouter {
 }
 
 
+
 #-------
 # Commande trouver
 #
@@ -288,7 +285,7 @@ function nb_credits {
     somme_credit=0
     shift
 
-    for a in "$@"
+    for a in "$@" 
     do
       assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
       ((somme_credit+=$(awk -F$SEP -v sigle=$1 '$1==sigle  {print $3}' $file)))
@@ -314,7 +311,7 @@ function supprimer {
    file=$1
    shift
    assert_depot_existe $file
-
+   
    [[ $# == 1 ]] || erreur "Argument(s) en trop: '$@'"
    assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
 
@@ -336,13 +333,13 @@ function supprimer {
 #-------
 function desactiver {
   file=$1
-
+  
   shift
   [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
   assert_depot_existe $file 
   assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
   res=$(awk -F$SEP -v sigle="$1" '/,INACTIF/ && sigle==$1 {print $5}' $file)
-
+  
   [[ $res == "" ]] || erreur "Cours deja inactif: $1"
   sed -i "/^$1,/ s/ACTIF/INACTIF/" $file #fonctionne sur malt mais pas sur osx le sed -i cause probleme
 
@@ -395,22 +392,15 @@ function prealables {
   assert_depot_existe $file
   shift
   ((args++))
-  assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
   [[ $# == 1 ]] || erreur "Nombre incorrect d'arguments"
-
+  assert_sigle_existant $1 $file || erreur "Aucun cours: $1"
+  
   prea_existe=$(awk -F$SEP -v prea="$1" 'prea==$1 {print $4}' $file)
-  #echo $prea_existe
 
   if [[ $prea_existe != "" ]]; then
-    
-     nb_champs=$(echo $prea_existe | awk -F$SEPARATEUR_PREALABLES '{print NF}') 
-     #echo $nb_champs
-     
-     sub=$(echo $prea_existe | sed -r 's/:/\x0a/g' )
-    
-     echo "$sub" | sort 
-     #echo "INF1130"
-     #echo "INF2120"
+    nb_champs=$(echo $prea_existe | awk -F$SEPARATEUR_PREALABLES '{print NF}') 
+    sub=$(echo $prea_existe | sed -r 's/:/\x0a/g' )
+    echo "$sub" | sort
   fi
 
 
@@ -419,27 +409,24 @@ function prealables {
 }
 
 
-
 ##########################################################################
 # Autre fonctions
 
 
 function assert_sigle_existant {
 
-    valid=$(grep $1 $2)
+  valid=$(grep $1 $2)
     existe=0
-    if [[ $valid == "" ]]; then
+    if [[ $valid == '' ]]; then
         existe=1
     fi
-
     return $existe
+
 }
 
 function assert_sigle_valid {
-   [[ $1 =~ [A-Z]{3}[0-9]{4} ]] || erreur "Sigle incorrect: $1"
-  return $?
+   [[ $1 =~ [A-Z]{3}[0-9]{4} ]] || erreur "Sigle est incorrect: $1"
 } 
-
 ##########################################################################
 
 
@@ -463,7 +450,7 @@ function main {
   # On definit le depot a utiliser.
   # A COMPLETER: il faut verifier si le flag --depot=... a ete specifie.
   # Si oui, il faut modifier depot en consequence!
-  depot=$DEPOT_DEFAUT
+  #depot=$DEPOT_DEFAUT
 
   debug "On utilise le depot suivant:", $depot
 
@@ -498,8 +485,7 @@ function main {
       *)
           erreur "Commande inconnue: '$commande'";;
   esac
-    shift $?
-
+  shift $?
   [[ $# == 0 ]] || erreur "Argument(s) en trop: '$@'"
 }
 
